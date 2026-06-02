@@ -25,4 +25,9 @@ public class ServicoController {
     public ResponseEntity<List<ServicoResponseDTO>> buscarServicos(){
         return ResponseEntity.ok(service.buscarTodos());
     }
+
+    @PutMapping(params = "id")
+    public ResponseEntity<ServicoResponseDTO> atualizarServico(@RequestParam Long id, @RequestBody ServicoRequestDTO dto){
+        return ResponseEntity.ok(service.atualizarAgendamento(id, dto));
+    }
 }
