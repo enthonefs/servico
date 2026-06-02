@@ -30,4 +30,11 @@ public class ServicoController {
     public ResponseEntity<ServicoResponseDTO> atualizarServico(@RequestParam Long id, @RequestBody ServicoRequestDTO dto){
         return ResponseEntity.ok(service.atualizarAgendamento(id, dto));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarServico(@PathVariable Long id){
+        service.apagarServico(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
