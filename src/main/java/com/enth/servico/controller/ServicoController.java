@@ -5,10 +5,9 @@ import com.enth.servico.business.dto.in.ServicoRequestDTO;
 import com.enth.servico.business.dto.out.ServicoResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,5 +19,10 @@ public class ServicoController {
     @PostMapping
     public ResponseEntity<ServicoResponseDTO> criarServico(@RequestBody ServicoRequestDTO dto){
         return ResponseEntity.ok(service.criarServico(dto));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ServicoResponseDTO>> buscarServicos(){
+        return ResponseEntity.ok(service.buscarTodos());
     }
 }
