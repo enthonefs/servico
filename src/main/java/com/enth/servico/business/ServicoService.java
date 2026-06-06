@@ -4,6 +4,7 @@ import com.enth.servico.business.converter.ServicoConverter;
 import com.enth.servico.business.dto.in.ServicoRequestDTO;
 import com.enth.servico.business.dto.out.ServicoResponseDTO;
 import com.enth.servico.infrastructure.entity.Servico;
+import com.enth.servico.infrastructure.exceptions.ResourceNotFoundException;
 import com.enth.servico.infrastructure.repository.ServicoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,12 @@ public class ServicoService {
 
     public List<ServicoResponseDTO> buscarTodos(){
         return servicoConverter.paraListaServicoResponseDTO(servicoRepository.findAll());
+    }
+
+    public ServicoResponseDTO buscarServicoPorId(Long id){
+        Servico servico = servicoRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Id de serviço não encontrado: " + id));
+        return servicoConverter.paraServicoResponseDTO(servico);
     }
 
     public ServicoResponseDTO criarServico(ServicoRequestDTO dto){
