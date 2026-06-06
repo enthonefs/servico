@@ -17,22 +17,30 @@ public class ServicoController {
     private final ServicoService service;
 
     @PostMapping
-    public ResponseEntity<ServicoResponseDTO> criarServico(@RequestBody ServicoRequestDTO dto){
+    public ResponseEntity<ServicoResponseDTO> criarServico(@RequestBody ServicoRequestDTO dto,
+                                                           @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.criarServico(dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<ServicoResponseDTO>> buscarServicos(){
+    public ResponseEntity<List<ServicoResponseDTO>> buscarServicos(@RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.buscarTodos());
     }
 
+    @GetMapping
+    public ResponseEntity<ServicoResponseDTO> buscarServicoPorId(@RequestParam Long id,
+                                                                 @RequestHeader("Auhorization") String token){
+        return ResponseEntity.ok(service.buscarServicoPorId(id));
+    }
+
     @PutMapping(params = "id")
-    public ResponseEntity<ServicoResponseDTO> atualizarServico(@RequestParam Long id, @RequestBody ServicoRequestDTO dto){
+    public ResponseEntity<ServicoResponseDTO> atualizarServico(@RequestParam Long id, @RequestBody ServicoRequestDTO dto,
+                                                               @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.atualizarAgendamento(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarServico(@PathVariable Long id){
+    public ResponseEntity<Void> deletarServico(@PathVariable Long id, @RequestHeader("Authorization") String token){
         service.apagarServico(id);
         return ResponseEntity.ok().build();
     }
