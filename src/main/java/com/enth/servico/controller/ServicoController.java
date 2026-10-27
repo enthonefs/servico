@@ -27,9 +27,9 @@ public class ServicoController {
         return ResponseEntity.ok(service.buscarTodos());
     }
 
-    @GetMapping
+    @GetMapping(params = "id")
     public ResponseEntity<ServicoResponseDTO> buscarServicoPorId(@RequestParam Long id,
-                                                                 @RequestHeader("Auhorization") String token){
+                                                                 @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.buscarServicoPorId(id));
     }
 
