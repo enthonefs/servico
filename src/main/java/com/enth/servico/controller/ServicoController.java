@@ -29,7 +29,7 @@ public class ServicoController {
 
     @GetMapping(params = "id")
     public ResponseEntity<ServicoResponseDTO> buscarServicoPorId(@RequestParam Long id,
-                                                                 @RequestHeader("Auhorization") String token){
+                                                                 @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.buscarServicoPorId(id));
     }
 
